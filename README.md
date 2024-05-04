@@ -1,4 +1,4 @@
-# ChessMe
+# Bishop Blitz
 
 An online Chess game: https://bishopblitz.netlify.app
 
