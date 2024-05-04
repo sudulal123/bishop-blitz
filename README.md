@@ -1,10 +1,12 @@
 # ChessMe
 
-An online Chess game
+An online Chess game: https://chessme.netlify.app
 
-[Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
+![ChessMe](https://github.com/sdulal123/chessMe/assets/86375908/fcaa7a1c-2ac0-4640-8bbe-3addd535c1f7)
 
 # Development server
+
+[Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. 
 
