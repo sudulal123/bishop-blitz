@@ -1,6 +1,6 @@
 # ChessMe
 
-An online Chess game: https://chess-me.netlify.app
+An online Chess game: https://bishopblitz.netlify.app
 
 ![ChessMe](https://github.com/sdulal123/chessMe/assets/86375908/fcaa7a1c-2ac0-4640-8bbe-3addd535c1f7)
 
