@@ -1,5 +1,5 @@
 {
-  "name": "chess-game",
+  "name": "bishop-blitz",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
