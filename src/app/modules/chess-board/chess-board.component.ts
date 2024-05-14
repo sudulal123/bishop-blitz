@@ -1,32 +1,53 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ChessBoard } from 'src/app/chess-logic/chess-board';
-import { CheckState, Color, Coords, FENChar, GameHistory, LastMove, MoveList, MoveType, SafeSquares, pieceImagePaths } from 'src/app/chess-logic/models';
 import { SelectedSquare } from './models';
 import { ChessBoardService } from './chess-board.service';
 import { Subscription, filter, fromEvent, tap } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChessBoard } from 'src/app/chess-logic/chess-board';
 import { FENConverter } from 'src/app/chess-logic/FENConverter';
+import {
+  CheckState,
+  Color,
+  Coords,
+  FENChar,
+  GameHistory,
+  LastMove,
+  MoveList,
+  MoveType,
+  SafeSquares,
+  pieceImagePaths,
+} from 'src/app/chess-logic/models';
 
 @Component({
   selector: 'app-chess-board',
   templateUrl: './chess-board.component.html',
-  styleUrls: ['./chess-board.component.css']
+  styleUrls: ['./chess-board.component.css'],
 })
 export class ChessBoardComponent implements OnInit, OnDestroy {
   public pieceImagePaths = pieceImagePaths;
 
   protected chessBoard = new ChessBoard();
   public chessBoardView: (FENChar | null)[][] = this.chessBoard.chessBoardView;
-  public get playerColor(): Color { return this.chessBoard.playerColor; };
-  public get safeSquares(): SafeSquares { return this.chessBoard.safeSquares; };
-  public get gameOverMessage(): string | undefined { return this.chessBoard.gameOverMessage; };
+  public get playerColor(): Color {
+    return this.chessBoard.playerColor;
+  }
+  public get safeSquares(): SafeSquares {
+    return this.chessBoard.safeSquares;
+  }
+  public get gameOverMessage(): string | undefined {
+    return this.chessBoard.gameOverMessage;
+  }
 
   private selectedSquare: SelectedSquare = { piece: null };
   private pieceSafeSquares: Coords[] = [];
   private lastMove: LastMove | undefined = this.chessBoard.lastMove;
   private checkState: CheckState = this.chessBoard.checkState;
 
-  public get moveList(): MoveList { return this.chessBoard.moveList; };
-  public get gameHistory(): GameHistory { return this.chessBoard.gameHistory; };
+  public get moveList(): MoveList {
+    return this.chessBoard.moveList;
+  }
+  public get gameHistory(): GameHistory {
+    return this.chessBoard.gameHistory;
+  }
   public gameHistoryPointer: number = 0;
 
   // promotion properties
@@ -34,27 +55,43 @@ export class ChessBoardComponent implements OnInit, OnDestroy {
   private promotionCoords: Coords | null = null;
   private promotedPiece: FENChar | null = null;
   public promotionPieces(): FENChar[] {
-    return this.playerColor === Color.White ?
-      [FENChar.WhiteKnight, FENChar.WhiteBishop, FENChar.WhiteRook, FENChar.WhiteQueen] :
-      [FENChar.BlackKnight, FENChar.BlackBishop, FENChar.BlackRook, FENChar.BlackQueen];
+    return this.playerColor === Color.White
+      ? [
+          FENChar.WhiteKnight,
+          FENChar.WhiteBishop,
+          FENChar.WhiteRook,
+          FENChar.WhiteQueen,
+        ]
+      : [
+          FENChar.BlackKnight,
+          FENChar.BlackBishop,
+          FENChar.BlackRook,
+          FENChar.BlackQueen,
+        ];
   }
 
   public flipMode: boolean = false;
   private subscriptions$ = new Subscription();
 
-  constructor(protected chessBoardService: ChessBoardService) { }
+  constructor(protected chessBoardService: ChessBoardService) {}
 
   public ngOnInit(): void {
-    const keyEventSubscription$: Subscription = fromEvent<KeyboardEvent>(document, "keyup")
+    const keyEventSubscription$: Subscription = fromEvent<KeyboardEvent>(
+      document,
+      'keyup'
+    )
       .pipe(
-        filter(event => event.key === "ArrowRight" || event.key === "ArrowLeft"),
-        tap(event => {
+        filter(
+          (event) => event.key === 'ArrowRight' || event.key === 'ArrowLeft'
+        ),
+        tap((event) => {
           switch (event.key) {
-            case "ArrowRight":
-              if (this.gameHistoryPointer === this.gameHistory.length - 1) return;
+            case 'ArrowRight':
+              if (this.gameHistoryPointer === this.gameHistory.length - 1)
+                return;
               this.gameHistoryPointer++;
               break;
-            case "ArrowLeft":
+            case 'ArrowLeft':
               if (this.gameHistoryPointer === 0) return;
               this.gameHistoryPointer--;
               break;
@@ -89,17 +126,23 @@ export class ChessBoardComponent implements OnInit, OnDestroy {
   }
 
   public isSquareSafeForSelectedPiece(x: number, y: number): boolean {
-    return this.pieceSafeSquares.some(coords => coords.x === x && coords.y === y);
+    return this.pieceSafeSquares.some(
+      (coords) => coords.x === x && coords.y === y
+    );
   }
 
   public isSquareLastMove(x: number, y: number): boolean {
     if (!this.lastMove) return false;
     const { prevX, prevY, currX, currY } = this.lastMove;
-    return x === prevX && y === prevY || x === currX && y === currY;
+    return (x === prevX && y === prevY) || (x === currX && y === currY);
   }
 
   public isSquareChecked(x: number, y: number): boolean {
-    return this.checkState.isInCheck && this.checkState.x === x && this.checkState.y === y;
+    return (
+      this.checkState.isInCheck &&
+      this.checkState.x === x &&
+      this.checkState.y === y
+    );
   }
 
   public isSquarePromotionSquare(x: number, y: number): boolean {
@@ -124,12 +167,15 @@ export class ChessBoardComponent implements OnInit, OnDestroy {
     if (!piece) return;
     if (this.isWrongPieceSelected(piece)) return;
 
-    const isSameSquareClicked: boolean = !!this.selectedSquare.piece && this.selectedSquare.x === x && this.selectedSquare.y === y;
+    const isSameSquareClicked: boolean =
+      !!this.selectedSquare.piece &&
+      this.selectedSquare.x === x &&
+      this.selectedSquare.y === y;
     this.unmarkingPreviouslySlectedAndSafeSquares();
     if (isSameSquareClicked) return;
 
     this.selectedSquare = { piece, x, y };
-    this.pieceSafeSquares = this.safeSquares.get(x + "," + y) || [];
+    this.pieceSafeSquares = this.safeSquares.get(x + ',' + y) || [];
   }
 
   private placingPiece(newX: number, newY: number): void {
@@ -137,9 +183,13 @@ export class ChessBoardComponent implements OnInit, OnDestroy {
     if (!this.isSquareSafeForSelectedPiece(newX, newY)) return;
 
     // pawn promotion
-    const isPawnSelected: boolean = this.selectedSquare.piece === FENChar.WhitePawn || this.selectedSquare.piece === FENChar.BlackPawn;
-    const isPawnOnlastRank: boolean = isPawnSelected && (newX === 7 || newX === 0);
-    const shouldOpenPromotionDialog: boolean = !this.isPromotionActive && isPawnOnlastRank;
+    const isPawnSelected: boolean =
+      this.selectedSquare.piece === FENChar.WhitePawn ||
+      this.selectedSquare.piece === FENChar.BlackPawn;
+    const isPawnOnlastRank: boolean =
+      isPawnSelected && (newX === 7 || newX === 0);
+    const shouldOpenPromotionDialog: boolean =
+      !this.isPromotionActive && isPawnOnlastRank;
 
     if (shouldOpenPromotionDialog) {
       this.pieceSafeSquares = [];
@@ -153,10 +203,19 @@ export class ChessBoardComponent implements OnInit, OnDestroy {
     this.updateBoard(prevX, prevY, newX, newY, this.promotedPiece);
   }
 
-  protected updateBoard(prevX: number, prevY: number, newX: number, newY: number, promotedPiece: FENChar | null): void {
+  protected updateBoard(
+    prevX: number,
+    prevY: number,
+    newX: number,
+    newY: number,
+    promotedPiece: FENChar | null
+  ): void {
     this.chessBoard.move(prevX, prevY, newX, newY, promotedPiece);
     this.chessBoardView = this.chessBoard.chessBoardView;
-    this.markLastMoveAndCheckState(this.chessBoard.lastMove, this.chessBoard.checkState);
+    this.markLastMoveAndCheckState(
+      this.chessBoard.lastMove,
+      this.chessBoard.checkState
+    );
     this.unmarkingPreviouslySlectedAndSafeSquares();
     this.chessBoardService.chessBoardState$.next(this.chessBoard.boardAsFEN);
     this.gameHistoryPointer++;
@@ -174,14 +233,15 @@ export class ChessBoardComponent implements OnInit, OnDestroy {
     this.unmarkingPreviouslySlectedAndSafeSquares();
   }
 
-  private markLastMoveAndCheckState(lastMove: LastMove | undefined, checkState: CheckState): void {
+  private markLastMoveAndCheckState(
+    lastMove: LastMove | undefined,
+    checkState: CheckState
+  ): void {
     this.lastMove = lastMove;
     this.checkState = checkState;
 
-    if (this.lastMove)
-      this.moveSound(this.lastMove.moveType);
-    else
-      this.moveSound(new Set<MoveType>([MoveType.BasicMove]));
+    if (this.lastMove) this.moveSound(this.lastMove.moveType);
+    else this.moveSound(new Set<MoveType>([MoveType.BasicMove]));
   }
   public move(x: number, y: number): void {
     this.selectingPiece(x, y);
@@ -190,8 +250,10 @@ export class ChessBoardComponent implements OnInit, OnDestroy {
 
   private isWrongPieceSelected(piece: FENChar): boolean {
     const isWhitePieceSelected: boolean = piece === piece.toUpperCase();
-    return isWhitePieceSelected && this.playerColor === Color.Black ||
-      !isWhitePieceSelected && this.playerColor === Color.White;
+    return (
+      (isWhitePieceSelected && this.playerColor === Color.Black) ||
+      (!isWhitePieceSelected && this.playerColor === Color.White)
+    );
   }
 
   public showPreviousPosition(moveIndex: number): void {
@@ -202,14 +264,19 @@ export class ChessBoardComponent implements OnInit, OnDestroy {
   }
 
   private moveSound(moveType: Set<MoveType>): void {
-    const moveSound = new Audio("assets/sound/move.mp3");
+    const moveSound = new Audio('assets/sound/move.mp3');
 
-    if (moveType.has(MoveType.Promotion)) moveSound.src = "assets/sound/promote.mp3";
-    else if (moveType.has(MoveType.Capture)) moveSound.src = "assets/sound/capture.mp3";
-    else if (moveType.has(MoveType.Castling)) moveSound.src = "assets/sound/castling.mp3";
+    if (moveType.has(MoveType.Promotion))
+      moveSound.src = 'assets/sound/promote.mp3';
+    else if (moveType.has(MoveType.Capture))
+      moveSound.src = 'assets/sound/capture.mp3';
+    else if (moveType.has(MoveType.Castling))
+      moveSound.src = 'assets/sound/castling.mp3';
 
-    if (moveType.has(MoveType.CheckMate)) moveSound.src = "assets/sound/checkmate.mp3";
-    else if (moveType.has(MoveType.Check)) moveSound.src = "assets/sound/check.mp3";
+    if (moveType.has(MoveType.CheckMate))
+      moveSound.src = 'assets/sound/checkmate.mp3';
+    else if (moveType.has(MoveType.Check))
+      moveSound.src = 'assets/sound/check.mp3';
 
     moveSound.play();
   }
