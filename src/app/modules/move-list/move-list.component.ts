@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from "@angular/material/icon";
 import { MoveList } from 'src/app/chess-logic/models';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-move-list',
   templateUrl: './move-list.component.html',
   styleUrls: ['./move-list.component.css'],
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule]
+  imports: [CommonModule, MatButtonModule, MatIconModule],
 })
 export class MoveListComponent {
   @Input({ required: true }) public moveList!: MoveList;
