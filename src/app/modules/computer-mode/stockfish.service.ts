@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Color, FENChar } from 'src/app/chess-logic/models';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import {
   ChessMove,
   ComputerConfiguration,
   StockfishQueryParams,
   StockfishResponse,
 } from './models';
+import { Injectable } from '@angular/core';
+import { Color, FENChar } from 'src/app/chess-logic/models';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
