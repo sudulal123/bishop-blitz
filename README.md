@@ -1,35 +1,73 @@
-# Bishop Blitz
+<div align="center">
+  <br />
+    <a>
+      <img src="https://github.com/sdulal123/chessMe/assets/86375908/fcaa7a1c-2ac0-4640-8bbe-3addd535c1f7" alt="Project Banner">
+    </a>
+  <br />
+  <h4 align="center">https://bishopblitz.netlify.app</h4>
+  <h3 align="center">Bishop Blitz - An online chess game</h3>
+</div>
 
-An online Chess game: https://bishopblitz.netlify.app
+## <a name="table">Table of Contents</a>
 
-![ChessMe](https://github.com/sdulal123/chessMe/assets/86375908/fcaa7a1c-2ac0-4640-8bbe-3addd535c1f7)
+1. [Introduction](#introduction)
+2. [Tech Stacks](#tech-stacks)
+3. [Quick Start](#quick-start)
+4. [Features](#features)
 
-# Development server
 
-API: Stockfish API
+## <a name="introduction"> Introduction </a>
 
-[Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
+An online chess game created with Angular, TypeScript and Stockfish API.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
+## <a name="tech-stacks"> Tech Stack </a>
 
-## Code scaffolding
+- CSS
+- HTML
+- TypeScript
+- Angular (CLI version 14.2.1)
 
-Run `ng generate component component-name` to generate a new component.
 
-You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## <a name="quick-start"> Quick Start </a>
 
-## Build
+**Prerequisites**
 
-Run `ng build` to build the project.
+- [Node.js](https://nodejs.org/en)
+- [npm](https://www.npmjs.com/) (Node Package Manager)
 
-The build artifacts will be stored in the `dist/` directory.
+```bash
+# Clone the Repository
+git clone https://github.com/sudulal123/bishop-blitz.git
+cd bishop-blitz
 
-## Running unit tests
+# Installation Angular CLI
+npm install -g @angular/cli
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Run a dev server at http://localhost:4200/
+ng serve
 
-## Running end-to-end tests
+# Run the unit tests via [Karma]
+ng test
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
+# Run end-to-end tests via a platform of your choice
+ng e2e
 
-To use this command, you need to first add a package that implements end-to-end testing capabilities.
+# Build for production in the dist/ directory
+ng build
+```
+
+
+## <a name="features"> Features </a>
+
+**TBD**: TBD
+
+
+
+<!--
+5. [To-do](#to-do)
+
+## <a name="to-do"> To-do </a>
+- [ ] Page reload
+- [ ] Sign-in button with pop-up login dialogue
+- [ ] Alternative API to Imagin API for car images  
+-->
