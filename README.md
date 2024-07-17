@@ -61,8 +61,6 @@ ng build
 
 **TBD**: TBD
 
-
-
 <!--
 5. [To-do](#to-do)
 
