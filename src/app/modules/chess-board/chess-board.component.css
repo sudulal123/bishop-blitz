@@ -1,9 +1,10 @@
 .chess-board {
+  margin: auto;
+  width: 480px;
+  height: 480px;
   display: flex;
   justify-content: center;
   flex-direction: column-reverse;
-  width: 480px;
-  height: 480px;
 }
 
 .rotated {
@@ -16,12 +17,12 @@
 }
 
 .square {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
   width: 60px;
+  height: 60px;
+  display: flex;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
   border: 1px solid white;
   background-color: white;
 }
@@ -31,11 +32,11 @@
 }
 
 .promotion-dialog {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 300px;
   height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .promotion-dialog img {
@@ -45,8 +46,8 @@
 
 .close-promotion-dialog {
   font-size: 45px;
-  cursor: pointer;
   color: white;
+  cursor: pointer;
 }
 
 .dark {
@@ -68,28 +69,31 @@
 }
 
 .safe-square {
-  position: absolute;
   height: 20px;
   width: 20px;
-  background-color: #bbb;
-  border-radius: 50%;
   z-index: 100;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #bbb;
 }
 
 .king-in-check {
-  box-shadow: inset rgb(179, 21, 0) 0px 0px 40px 0px,
+  box-shadow: 
+    inset rgb(179, 21, 0) 0px 0px 40px 0px,
     inset rgb(163, 11, 0) 0px 0px 40px 0px,
     inset rgba(0, 0, 0, 1) 0px 0px 36px -24px;
 }
 
 .last-move {
-  box-shadow: inset rgb(6, 179, 0) 0px 0px 40px 0px,
+  box-shadow: 
+    inset rgb(6, 179, 0) 0px 0px 40px 0px,
     inset rgb(6, 179, 0) 0px 0px 40px 0px,
     inset rgba(0, 0, 0, 1) 0px 0px 36px -24px;
 }
 
 .promotion-square {
-  box-shadow: inset rgb(0, 98, 150) 0px 0px 40px 0px,
+  box-shadow: 
+    inset rgb(0, 98, 150) 0px 0px 40px 0px,
     inset rgb(0, 98, 150) 0px 0px 40px 0px,
     inset rgba(0, 0, 0, 1) 0px 0px 36px -24px;
 }

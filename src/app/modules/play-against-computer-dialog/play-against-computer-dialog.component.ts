@@ -18,9 +18,9 @@ export class PlayAgainstComputerDialogComponent {
   public stockfishLevel: number = 1;
 
   constructor(
-    private stockfishService: StockfishService,
+    private router: Router,
     private dialog: MatDialog,
-    private router: Router
+    private stockfishService: StockfishService
   ) {}
 
   public selectStockfishLevel(level: number): void {
