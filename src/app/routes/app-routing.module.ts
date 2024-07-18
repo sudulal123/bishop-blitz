@@ -7,12 +7,12 @@ const routes: Routes = [
   {
     path: 'against-friend',
     component: ChessBoardComponent,
-    title: 'Play against friend',
+    title: 'BishopBlitz | vs Friend',
   },
   {
     path: 'against-computer',
     component: ComputerModeComponent,
-    title: 'Play against computer',
+    title: 'BishopBlitz | vs Computer',
   },
 ];
 

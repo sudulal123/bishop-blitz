@@ -5,15 +5,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ChessBoard } from 'src/app/chess-logic/chess-board';
 import { FENConverter } from 'src/app/chess-logic/FENConverter';
 import {
-  CheckState,
   Color,
   Coords,
   FENChar,
-  GameHistory,
   LastMove,
   MoveList,
   MoveType,
+  CheckState,
   SafeSquares,
+  GameHistory,
   pieceImagePaths,
 } from 'src/app/chess-logic/models';
 

@@ -1,8 +1,8 @@
 import {
   ChessMove,
-  ComputerConfiguration,
-  StockfishQueryParams,
   StockfishResponse,
+  StockfishQueryParams,
+  ComputerConfiguration,
 } from './models';
 import { Injectable } from '@angular/core';
 import { Color, FENChar } from 'src/app/chess-logic/models';
