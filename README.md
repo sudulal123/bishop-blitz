@@ -13,7 +13,7 @@
 1. [Introduction](#introduction)
 2. [Tech Stacks](#tech-stacks)
 3. [Quick Start](#quick-start)
-4. [Features](#features)
+<!-- 4. [Features](#features) -->
 
 
 ## <a name="introduction"> Introduction </a>
@@ -55,12 +55,12 @@ ng e2e
 ng build
 ```
 
-
+<!--
 ## <a name="features"> Features </a>
 
 **TBD**: TBD
 
-<!--
+
 5. [To-do](#to-do)
 
 ## <a name="to-do"> To-do </a>
