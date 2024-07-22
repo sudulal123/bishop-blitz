@@ -33,7 +33,6 @@ An online chess game created with Angular, TypeScript and Stockfish API.
 **Prerequisites**
 
 - [Node.js](https://nodejs.org/en)
-- [npm](https://www.npmjs.com/) (Node Package Manager)
 
 ```bash
 # Clone the Repository
